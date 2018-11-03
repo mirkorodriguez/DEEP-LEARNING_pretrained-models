@@ -31,9 +31,9 @@ def rayosxy():
 	with graph.as_default():
 		score = loaded_model.predict(x)
 		if score < 0.5:
-			resultado = 'Prediccion: Abdomen X-ray , score: ' + score
+			resultado = 'Prediccion: Abdomen X-ray , score: ' + score[0][0]
 		else:
-		    resultado = 'Prediccion: Pulmon X-ray , score: ' + score
+		    resultado = 'Prediccion: Pulmon X-ray , score: ' + score[0][0]
 		print('Prediccion:', score, 'Abdomen X-ray' if score < 0.5 else 'Pulmon X-ray')
 		return resultado
 

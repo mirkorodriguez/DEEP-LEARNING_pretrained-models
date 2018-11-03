@@ -6,7 +6,7 @@ import numpy as np
 
 #Initialize the application service
 app = Flask(__name__)
-global loaded_model
+global loaded_model, graph
 loaded_model = cargarModelo()
 
 #Define a route
@@ -27,17 +27,11 @@ def rayosxy():
 	img = image.load_img(img_path, target_size=(img_width, img_height))
 	img = image.img_to_array(img)
 	x = np.expand_dims(img, axis=0) * 1./255
-	score = loaded_model.predict(x)
-	print('Prediccion:', score, 'Abdomen X-ray' if score < 0.5 else 'Pulmon X-ray')
 
-	img_path='../samples/img2.png' #change to location of chest x-ray
-	img = image.load_img(img_path, target_size=(img_width, img_height))
-	img = image.img_to_array(img)
-	x = np.expand_dims(img, axis=0) * 1./255
-	score = loaded_model.predict(x)
-	#print('Prediccion:', score, 'Abdomen X-ray' if score < 0.5 else 'Pulmon X-ray')
-
-	return 'Prediccion:' + score + 'Abdomen X-ray' if score < 0.5 else 'Pulmon X-ray'
+	with graph.as_default():
+		score = loaded_model.predict(x)
+		#print('Prediccion:', score, 'Abdomen X-ray' if score < 0.5 else 'Pulmon X-ray')
+		return 'Prediccion:' + score + 'Abdomen X-ray' if score < 0.5 else 'Pulmon X-ray'
 
 # Run de application
 app.run(host='0.0.0.0',port=5000)

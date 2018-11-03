@@ -20,4 +20,4 @@ def cargarModelo():
     loaded_model.compile(optimizer=Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=1e-08,decay=0.0), loss='binary_crossentropy', metrics=['accuracy'])
     print("Modelo cargado de disco!")
     graph = tf.get_default_graph()
-    return loaded_model
+    return loaded_model, graph

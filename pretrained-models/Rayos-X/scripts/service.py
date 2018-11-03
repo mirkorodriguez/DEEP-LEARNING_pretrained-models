@@ -7,7 +7,7 @@ import numpy as np
 #Initialize the application service
 app = Flask(__name__)
 global loaded_model, graph
-loaded_model = cargarModelo()
+loaded_model, graph = cargarModelo()
 
 #Define a route
 @app.route('/')

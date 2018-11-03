@@ -1,6 +1,7 @@
 #Import Flask
 from flask import Flask
 from keras.preprocessing import image
+from cnn_executor import cargarModelo
 import numpy as np
 
 #Initialize the application service

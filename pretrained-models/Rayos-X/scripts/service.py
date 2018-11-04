@@ -1,5 +1,5 @@
 #Import Flask
-from flask import Flask
+from flask import Flask, request
 from keras.preprocessing import image
 from cnn_executor import cargarModelo
 import numpy as np
@@ -19,11 +19,13 @@ def rayosx():
 	return 'Modelo Rayos-X!'
 
 @app.route('/rayos-x/default/', methods=['GET','POST'])
-def rayosxy():
+def default():
+	print (request.args)
 	# dimensions of our images.
 	img_width, img_height = 299, 299
 	# Show
-	img_path='../samples/img1.png'
+	image_name = request.args.get("imagen")
+	img_path='../samples/'+image_name
 	img = image.load_img(img_path, target_size=(img_width, img_height))
 	img = image.img_to_array(img)
 	x = np.expand_dims(img, axis=0) * 1./255
@@ -31,9 +33,9 @@ def rayosxy():
 	with graph.as_default():
 		score = loaded_model.predict(x)
 		if score < 0.5:
-			resultado = 'Prediccion: Abdomen X-ray , score: ' + score[0][0]
+			resultado = 'Prediccion: Abdomen X-ray , score: ' + str(score[0][0])
 		else:
-		    resultado = 'Prediccion: Pulmon X-ray , score: ' + score[0][0]
+		    resultado = 'Prediccion: Pulmon X-ray , score: ' + str(score[0][0])
 		print('Prediccion:', score, 'Abdomen X-ray' if score < 0.5 else 'Pulmon X-ray')
 		return resultado
 

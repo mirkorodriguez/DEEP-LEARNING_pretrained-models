@@ -10,7 +10,7 @@ from keras.models import model_from_json
 import matplotlib.pyplot as plt
 from keras.optimizers import Adam
 
-def cargarModelo():
+def cargarModeloVGG():
     json_file = open('../model/rx_model.json', 'r')
     loaded_model_json = json_file.read()
     json_file.close()

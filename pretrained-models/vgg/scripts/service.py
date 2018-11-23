@@ -1,9 +1,11 @@
 #Import Flask
 from flask import Flask, request
+#Import Keras
 from keras.preprocessing import image
 from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
 from keras.applications.imagenet_utils import decode_predictions
+#Import python files
 from vgg_loader import cargarModeloVGG
 import numpy as np
 

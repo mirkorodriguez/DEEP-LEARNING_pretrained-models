@@ -4,6 +4,8 @@ from flask import Flask, request
 from keras.preprocessing import image
 from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
+#VGG
+from keras.applications import vgg16
 from keras.applications.imagenet_utils import decode_predictions
 #Import python files
 from vgg_loader import cargarModeloVGG
@@ -22,7 +24,7 @@ def main_page():
 @app.route('/vgg/predict/',methods=['GET','POST'])
 def default():
 	#Default image
-	filename = '../samples/perro.jpg'
+	filename = '../../samples/image01.jpg'
 	# load an image in PIL format
 	original = load_img(filename, target_size=(224, 224))
 	print('PIL image size',original.size)

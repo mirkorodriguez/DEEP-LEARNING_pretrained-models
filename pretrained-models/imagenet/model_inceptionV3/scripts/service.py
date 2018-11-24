@@ -88,8 +88,9 @@ def predict():
 			filename = secure_filename(file.filename)
 			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
+			###############################################################
 			#loading image
-			filename = UPLOAD_FOLDER + 'name'
+			filename = UPLOAD_FOLDER + '/' + filename
 
 			original = load_img(filename, target_size=(229, 229))
 			print('PIL image size',original.size)
@@ -111,6 +112,7 @@ def predict():
 				# convert the probabilities to class labels
 				label_inceptionV3 = decode_predictions(predictions)
 				print(label_inceptionV3)
+			###############################################################
 
 				#Results as Json
 				data["predictions"] = []

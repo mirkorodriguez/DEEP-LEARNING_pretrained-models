@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>URP - Deep Learnign - Image Classification</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+    <link href="css/spinner.css" rel="stylesheet">
+    <!-- Angular -->
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <!-- Chart -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+      var loadFile = function(event) {
+        var output = document.getElementById('imagen');
+        output.heigth = "50";
+        output.witdh = "50";
+        output.src = URL.createObjectURL(event.target.files[0]);
+
+        var x = document.getElementById("resultadosdiv");
+        x.style.display = "none";
+      };
+    </script>
+  </head>
+
+<body ng-app="myApp" ng-controller="myController"  >
+<!-- <div ng-app="myApp" ng-controller="myController" class="container"> -->
+
+  <!-- Login Section -->
+  <div class="container">
+        <form name="myForm">
+          <div class="login-container">
+            <div class="row">
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Imagen a consultar:</label>
+                  <input type="file" name="file" ng-model="cn" class="form-control" accept=".jpg,.jpeg,.png" onchange="loadFile(event)" required>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <img id="imagen" class="img-responsive"/>
+                </div>
+              </div>
+
+              <div id="resultadosdiv" class="col-md-12">
+                <div class="form-group">
+                  <div >
+                    <table id="resultados" class="table table-striped" ng-show="resultsPreview">
+                      <tr style="background-color:lightblue;">
+                        <th>Clase</th>
+                        <th>Prabilidad</th>
+                      </tr>
+                      <tr ng-repeat= "element in predictions" style="background-color:lightcyan;">
+                        <td>{{element.label}}</td>
+                        <td>{{element.probability}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <button ng-click="clasificarImagen()" class="btn btn-info pull-right">
+                    <div ng-show="!loading">Clasificar Imagen</div>
+                    <div ng-show="loading" class="loader"> </div>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div ng-show="showError" class="alert alert-danger">Error!</div>
+              </div>
+            </div>
+
+          </div>
+        </form>
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+
+</body>

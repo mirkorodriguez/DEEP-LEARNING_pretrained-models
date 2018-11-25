@@ -1,5 +1,6 @@
 #Import Flask
 from flask import Flask, request, jsonify, redirect
+from flask_cors import CORS
 #Import Keras
 from keras.preprocessing import image
 from keras.preprocessing.image import load_img
@@ -19,6 +20,7 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 #Initialize the application service
 app = Flask(__name__)
+CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 global inceptionV3_model, inceptionV3_graph
 inceptionV3_model, inceptionV3_graph = cargarModeloInceptionV3()

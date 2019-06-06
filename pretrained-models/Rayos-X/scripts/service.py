@@ -31,12 +31,13 @@ def default():
 	x = np.expand_dims(img, axis=0) * 1./255
 
 	with graph.as_default():
+		resultado = "Predicción: "
 		score = loaded_model.predict(x)
 		if score < 0.5:
-			resultado = 'Prediccion: Abdomen X-ray , score: ' + str(score[0][0])
+			resultado += "Abdomen X-ray, score: " + str(score[0][0])
 		else:
-		    resultado = 'Prediccion: Pulmon X-ray , score: ' + str(score[0][0])
-		print('Prediccion:', score, 'Abdomen X-ray' if score < 0.5 else 'Pulmon X-ray')
+		    resultado += "Pulmon X-ray, score: " + str(score[0][0])
+		print('Predicción:', score, 'Abdomen X-ray' if score < 0.5 else 'Pulmon X-ray')
 		return resultado
 
 # Run de application

@@ -36,8 +36,8 @@ def default():
 		if score < 0.5:
 			resultado += "Abdomen X-ray, score: " + str(score[0][0])
 		else:
-		    resultado += "Pulmon X-ray, score: " + str(score[0][0])
-		print('Predicción:', score, 'Abdomen X-ray' if score < 0.5 else 'Pulmon X-ray')
+		    resultado += "Tórax X-ray, score: " + str(score[0][0])
+		print('Predicción:', score, 'Abdomen X-ray' if score < 0.5 else 'Tórax X-ray')
 		return resultado
 
 # Run de application
